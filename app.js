@@ -110,7 +110,7 @@ urlSchema.pre('save', function(next) {
 var URL = mongoose.model('URL', urlSchema);
 
 // Connect to the MongoDB instance
-promise = mongoose.connect(connectionString,{
+promise = mongoose.connect("mongodb+srv://vasukivardhan:Vasu@1996@cluster0-qruel.mongodb.net/UrlShort?retryWrites=true&w=majority",{
     useNewUrlParser: true
 });
 
