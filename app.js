@@ -110,8 +110,8 @@ urlSchema.pre('save', function(next) {
 var URL = mongoose.model('URL', urlSchema);
 
 // Connect to the MongoDB instance
-promise = mongoose.connect(connectionString, {
-    useMongoClient: true
+promise = mongoose.connect(connectionString,{
+    useNewUrlParser: true
 });
 
 // Reset the app to default values when starting the server
