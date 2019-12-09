@@ -1,0 +1,24 @@
+{
+  "name": "url-short",
+  "version": "1.0.0",
+  "description": "url shortning service",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "url-shortners"
+  ],
+  "dependencies": {
+    "atob": "^2.0.3",
+    "body-parser": "^1.15.2",
+    "btoa": "^1.1.2",
+    "cors": "^2.8.5",
+    "dotenv": "^4.0.0",
+    "express": "^4.10.2",
+    "mongoose": "^4.13.7",
+    "redis": "^2.8.0"
+  },
+  "author": "Vasuki Vardhan G",
+  "license": "ISC"
+}
