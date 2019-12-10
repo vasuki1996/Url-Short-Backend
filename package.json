@@ -1,25 +1,29 @@
 {
-  "name": "url-short",
-  "version": "1.0.0",
-  "description": "url shortning service",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-	"start": "node app.js"
-  },
-  "keywords": [
-    "url-shortners"
-  ],
-  "dependencies": {
-    "atob": "^2.0.3",
-    "body-parser": "^1.15.2",
-    "btoa": "^1.1.2",
-    "cors": "^2.8.5",
-    "dotenv": "^4.0.0",
-    "express": "^4.10.2",
-    "mongoose": "^5.7.14",
-    "redis": "^2.8.0"
-  },
-  "author": "Vasuki Vardhan G",
-  "license": "ISC"
-}
+    "name": "backend",
+    "version": "1.0.0",
+    "description": "url shortning service",
+    "main": "app.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node app.js",
+      "dev": "nodemon app.js"
+    },
+    "keywords": [
+      "url-short"
+    ],
+    "author": "Vasuki Vardhan G",
+    "dependencies": {
+      "atob": "^2.0.3",
+      "body-parser": "^1.15.2",
+      "btoa": "^1.1.2",
+      "cors": "^2.8.5",
+      "dotenv": "^4.0.0",
+      "express": "^4.10.2",
+      "mongoose": "^5.7.14",
+      "redis": "^2.8.0"
+    },
+    "license": "ISC",
+    "devDependencies": {
+      "nodemon": "^2.0.1"
+    }
+  }

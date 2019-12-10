@@ -22,6 +22,7 @@ var express = require('express'),
     //rateLimiter = require('./rateLimiter'),
     redis = require('redis'),
     cors = require('cors'),
+	{ mongo_url, redis_host, redis_port, redis_password } = require('./env'),
     promise,
     connectionString = process.env.connectionString,
     port = process.env.PORT || 8080;
@@ -36,13 +37,14 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+app.use(bodyParser.json());
 app.use(cors());
 
 const client = redis.createClient({
-    host : 'redis-16074.c114.us-east-1-4.ec2.cloud.redislabs.com',
-    port: 16074,  
+    host : redis_host,
+    port: redis_port,  
     no_ready_check: true,
-    auth_pass: "V49AuEQ1RjxAIM91YVipLDL4bonYv0Dq",                                                                                                                                                           
+    auth_pass: redis_password,                                                                                                                                                           
 });
 app.use((req, res, next) => {
     const token = req.connection.remoteAddress // get the unique identifier for the user here
@@ -82,7 +84,7 @@ var Counter = mongoose.model('Counter', countersSchema);
 
 // URL Collection Schema
 var urlSchema = new mongoose.Schema({
-    //_id: {type: Number},
+    _id: {type: Number},
     url: '',
     created_at: ''
 });
@@ -110,7 +112,7 @@ urlSchema.pre('save', function(next) {
 var URL = mongoose.model('URL', urlSchema);
 
 // Connect to the MongoDB instance
-promise = mongoose.connect("mongodb+srv://vasukivardhan:Vasu@1996@cluster0-qruel.mongodb.net/UrlShort?retryWrites=true&w=majority",{
+promise = mongoose.connect(mongo_url,{
     useNewUrlParser: true
 });
 
@@ -147,6 +149,7 @@ app.get('/:hash', function(req, res) {
         URL.findOne({ _id: id }, function(err, doc) {
             if(doc) {
                 console.log('APP: Found ID in DB, redirecting to URL');
+                console.log(doc.url);
                 res.redirect(doc.url);
             } else {
                 console.log('APP: Could not find ID in DB, redirecting to home');
@@ -159,10 +162,18 @@ app.get('/:hash', function(req, res) {
 
 // API for shortening
 app.post('/shorten', function(req, res, next) {
-    var urlData = req.body.url;
+    var urlData = req.query.url;
+    console.log("From Request", req.query);
+    console.log("in url Data", urlData);
     URL.findOne({url: urlData}, function(err, doc) {
         if(doc) {
             console.log('APP: URL found in DB');
+            console.log({
+                url: urlData,
+                hash: btoa(doc._id),
+                status: 200,
+                statusTxt: 'OK'
+            });
             res.json({
                 url: urlData,
                 hash: btoa(doc._id),
@@ -178,6 +189,12 @@ app.post('/shorten', function(req, res, next) {
                 if(err) {
                     return console.error(err);
                 }
+                console.log({
+                    url: urlData,
+                    hash: btoa(url._id),
+                    status: 200,
+                    statusTxt: 'OK'
+                })
                 res.json({
                     url: urlData,
                     hash: btoa(url._id),
