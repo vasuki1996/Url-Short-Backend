@@ -69,9 +69,7 @@ app.use((req, res, next) => {
 
 // Base route for front-end
 app.get('/', function(req, res) {
-    res.sendFile('views/index.html', {
-        root: __dirname
-    });
+    res.redirect("https://test-url-short.000webhostapp.com/");
 });
 
 // Counter Collection Schema
@@ -154,7 +152,7 @@ app.get('/:hash', function(req, res) {
             } else {
                 console.log('APP: Could not find ID in DB, redirecting to home');
                 console.log(err);
-                res.redirect('/');
+                res.redirect('https://test-url-short.000webhostapp.com/');
             }
         });
     }
