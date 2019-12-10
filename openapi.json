@@ -1,0 +1,94 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Url Short",
+    "description": "Microservice to shorten urls",
+    "termsOfService": "/terms",
+    "contact": {
+      "email": "contact@vasukivardhan.xyz"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://mit-license.org/"
+    },
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "paths": {
+    "/shorten": {
+      "post": {
+        "summary": "shorten urls",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string"
+                    },
+                    "hash": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "statusTxt": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{hash}": {
+      "get": {
+        "summary": "Get video transcode status on demand",
+        "parameters": [
+          {
+            "name": "hash",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Redirects to Site",
+            "content": {}
+          },
+          "400": {
+            "description": "Redirects to base",
+            "content": {}
+          },
+          "404": {
+            "description": "Redirects to base",
+            "content": {}
+          }
+        }
+      }
+    }
+  },
+  "components": {}
+}
